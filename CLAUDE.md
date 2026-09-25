@@ -2,8 +2,8 @@
 
 A solo-author static blog: Astro 7 + TypeScript, deployed to **Cloudflare** by its
 dashboard's own Git integration, served from the domain root. Independent
-from the sibling GitHub Pages blog (`CreativeDigitalGrowth/CreativeDigitalGrowth.github.io`)
-and the sibling GitLab Pages blog (`creativedigitalgrowth.gitlab.io`) — not a mirror, no
+from the sibling GitHub Pages blog (`LocalSEOHUB/LocalSEOHUB.github.io`)
+and the sibling GitLab Pages blog (`localseohub.gitlab.io`) — not a mirror, no
 shared content, no shared git history. Full detail in
 [`docs/architecture.md`](docs/architecture.md).
 
@@ -82,7 +82,7 @@ in the Cloudflare dashboard (build log and status) before suspecting anything el
 ```bash
 npm run check    # expect 0 errors
 npm run build
-grep -rhoE 'https?://[^"< ]+' dist --include=*.html | grep -v 'creativedigitalgrowth.pages.dev' | sort -u
+grep -rhoE 'https?://[^"< ]+' dist --include=*.html | grep -v 'localseohub.pages.dev' | sort -u
 ```
 
 The grep must print only genuinely external URLs (giscus, google maps, unpkg). If the
@@ -92,7 +92,7 @@ change is visible in a browser, verify with `npm run preview` rather than `npm r
 ## Deployment
 
 Push to `main` → Cloudflare's dashboard Git integration (Workers & Pages → this project,
-connected directly to `CreativeDigitalGrowth/cloudflare-blog`) picks it up via its own
+connected directly to `LocalSEOHUB/cloudflare-blog`) picks it up via its own
 GitHub App installation and builds and deploys it itself — `npm run build` (which
 triggers the `postbuild` Pagefind index), then publishing the output directory. Saving in
 the CMS is a push, so publishing and deploying are the same action. There is no GitHub
@@ -109,9 +109,9 @@ repository.** There is no `wrangler.toml` and none is needed. This is the one re
 equivalent settings live in a workflow file you can read in this repo — here, look in
 the dashboard instead. See [`docs/setup.md`](docs/setup.md).
 
-Local git authenticates as `mohiseen-aumni`, the same account used for the sibling
+Local git authenticates as `LocalSEOHUB`, the same account used for the sibling
 GitHub Pages blog. The repository exists on GitHub, is public, and is live at
-`CreativeDigitalGrowth/cloudflare-blog`.
+`LocalSEOHUB/cloudflare-blog`.
 
 ## Documentation
 

@@ -1,4 +1,4 @@
-# Served at https://creativedigitalgrowth.pages.dev/robots.txt
+# Served at https://localseohub.pages.dev/robots.txt
 #
 # This Cloudflare Pages project is served from its own domain root, so the file
 # sits where crawlers expect it. (Under a sub-path deployment it would need to
@@ -8,4 +8,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://creativedigitalgrowth.pages.dev/sitemap-index.xml
+Sitemap: https://localseohub.pages.dev/sitemap-index.xml

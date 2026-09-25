@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 // can move under a sub-path (or onto a custom domain, see docs/setup.md) by changing
 // `site`/`base` here and nothing else.
 export default defineConfig({
-  site: 'https://creativedigitalgrowth.pages.dev',
+  site: 'https://localseohub.pages.dev',
   trailingSlash: 'always',
   integrations: [
     sitemap({

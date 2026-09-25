@@ -4,7 +4,7 @@ A static blog for a single author. Astro + TypeScript, Markdown content collecti
 Sveltia CMS at `/admin`, Pagefind search, Giscus comments, deployed to **Cloudflare** by
 its dashboard's own Git integration.
 
-**Live URL:** <https://creativedigitalgrowth.pages.dev/> — see
+**Intended live URL:** <https://localseohub.pages.dev/> — not yet deployed, see
 [Status](#status) below for what's still outstanding.
 
 No server, no database, no tracking scripts, no cookie banner, no CSS framework. Three
@@ -90,22 +90,25 @@ author, `absFromBuiltPath()` for paths Astro produced, `absUrl()` for absolute U
 To verify after any change, build and confirm every absolute URL points at this site:
 
 ```bash
-grep -rhoE 'https?://[^"< ]+' dist --include=*.html --include=*.xml   | grep -v 'creativedigitalgrowth.pages.dev' | sort -u
+grep -rhoE 'https?://[^"< ]+' dist --include=*.html --include=*.xml   | grep -v 'localseohub.pages.dev' | sort -u
 ```
 
 ## Status
 
-This project was scaffolded from the sibling GitHub Pages blog. The repo/deploy pipeline
-is done:
+This project was forked from the sibling Cloudflare Pages blog and rebranded for
+LocalSEOHUB. The repo/deploy pipeline is **not yet set up**:
 
-- GitHub repository created and pushed — public, `CreativeDigitalGrowth/cloudflare-blog`
-- Cloudflare's dashboard connected directly to that repo via its own Git integration
-- The site builds and deploys automatically on every push to `main`
-- The site renders at the live URL above
+- GitHub repository created and pushed — public, `LocalSEOHUB/cloudflare-blog`
+- Cloudflare's dashboard is **not yet** connected to this repo via its own Git integration
+- The site does **not yet** build or deploy automatically — that starts once the
+  Cloudflare Git integration is connected (see [docs/setup.md](docs/setup.md))
+- The site is **not yet live** at the URL above
 
 Still outstanding:
 
+- Connect Cloudflare's dashboard Git integration to this repo (pending)
 - CMS access token, Giscus IDs, contact form endpoint, author details in `src/consts.ts`
+  (including a real `AUTHOR_EMAIL` — still the template's `you@example.com` placeholder)
 
 The site also builds and runs locally (`npm run dev` / `npm run build` / `npm run
 preview`) independent of all of the above. Full checklist in

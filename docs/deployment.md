@@ -1,12 +1,12 @@
 # Deployment
 
-**Live URL:** <https://creativedigitalgrowth.pages.dev> — a classic Cloudflare Pages
-project, created via Cloudflare's dashboard Git integration connected to this repo.
-**GitHub repo:** `CreativeDigitalGrowth/cloudflare-blog` — public, pushed, what the CMS
-commits to and what Cloudflare's Git integration watches.
-**Cloudflare project:** connected directly to that repo from the Cloudflare dashboard
-(**Workers & Pages**) — see [setup.md](setup.md#1-cloudflare-git-integration) for how
-that connection was made.
+**Status:** not yet deployed — the Cloudflare Pages project has not been created yet.
+**Intended live URL:** <https://localseohub.pages.dev> — will be a classic Cloudflare
+Pages project, created via Cloudflare's dashboard Git integration connected to this repo.
+**GitHub repo:** `LocalSEOHUB/cloudflare-blog` — public, pushed, what the CMS will
+commit to and what Cloudflare's Git integration will watch once connected.
+**Cloudflare project:** not yet connected to this repo — see
+[setup.md](setup.md#1-cloudflare-git-integration) for how to make that connection.
 
 ## How it works
 
@@ -34,9 +34,9 @@ build step to configure, and no way to deploy a site whose search index is stale
 
 ## What's configurable, and where
 
-There is no project-creation step and no repository secrets — the one-time setup was
+There is no project-creation step and no repository secrets — the one-time setup is
 connecting the Cloudflare dashboard to this GitHub repo (**Workers & Pages → Create →
-Connect to Git**, done already; see [setup.md](setup.md#1-cloudflare-git-integration)).
+Connect to Git**, still pending; see [setup.md](setup.md#1-cloudflare-git-integration)).
 
 What *is* configurable lives entirely in the Cloudflare dashboard, not in any file in
 this repo — there is no `wrangler.toml`:
@@ -63,11 +63,11 @@ There is no GitHub Actions run to check alongside it — a build either succeeds
 entirely on Cloudflare's side, and its log is the only place to see why.
 
 A smoke test against the live site is the check that actually matters — it tests what
-visitors get rather than what the local build produced. This should actually be run for
-real now, since the site is live:
+visitors get rather than what the local build produced. Run this for real once the
+Cloudflare project is connected and the site is actually live:
 
 ```bash
-B=https://creativedigitalgrowth.pages.dev
+B=https://localseohub.pages.dev
 for p in "" "blog/" "about/" "contact/" "search/" "admin/" "rss.xml" "sitemap-index.xml" "pagefind/pagefind-ui.js"; do
   echo "$(curl -s -o /dev/null -w '%{http_code}' -L "$B/$p")  /$p"
 done
@@ -80,7 +80,7 @@ All should return `200`. Then confirm nothing leaked:
 curl -s -o /dev/null -w '%{http_code}\n' -L "$B/blog/<draft-slug>/"   # expect 404
 
 # no root-absolute internal references
-curl -s -L "$B/" | grep -ohE 'https?://[^"]+' | grep -v 'creativedigitalgrowth.pages.dev' | sort -u
+curl -s -L "$B/" | grep -ohE 'https?://[^"]+' | grep -v 'localseohub.pages.dev' | sort -u
 ```
 
 ## Rollback
@@ -117,13 +117,15 @@ draft exclusion. Use `preview` before assuming a deploy will behave.
 
 Two independent access paths, not one.
 
-**GitHub.** Pushing requires write access to `CreativeDigitalGrowth/cloudflare-blog`.
+**GitHub.** Pushing requires write access to `LocalSEOHUB/cloudflare-blog`.
 Changing repository settings — Discussions, collaborators, and which GitHub Apps are
-installed — requires **admin**, held by `CreativeDigitalGrowth`. The `mohiseen-aumni`
-account has Write only — same pattern as the sibling GitHub Pages repo.
+installed — requires **admin**. The repository is owned by the `LocalSEOHUB` account,
+which holds admin (and therefore write) on it directly — there is no separate
+collaborator account in this setup, unlike the sibling GitHub Pages repo's split
+between an owning org and a write-only collaborator account.
 
 ```bash
-gh api repos/CreativeDigitalGrowth/cloudflare-blog --jq '.permissions'
+gh api repos/LocalSEOHUB/cloudflare-blog --jq '.permissions'
 ```
 
 **Cloudflare.** Separately, whoever has login access to the Cloudflare account/dashboard
